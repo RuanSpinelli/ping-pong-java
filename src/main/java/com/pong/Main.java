@@ -1,13 +1,26 @@
 package com.pong;
 
+import com.pong.config.GameConfig;
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        stage.setTitle("Ping Pong");
+        Pane root = new Pane();
+        root.setStyle("-fx-background-color: black;");
+
+        Scene scene = new Scene(
+                root,
+                GameConfig.WIDTH,
+                GameConfig.HEIGHT
+        );
+
+        stage.setTitle("Ping Pong com Java");
+        stage.setScene(scene);
         stage.show();
     }
 
