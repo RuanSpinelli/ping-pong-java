@@ -7,6 +7,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+        stage.setTitle("Ping Pong");
         stage.show();
     }
 
