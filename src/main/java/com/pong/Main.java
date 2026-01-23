@@ -1,6 +1,7 @@
 package com.pong;
 
 import com.pong.config.GameConfig;
+import com.pong.game.GameLoop;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -22,6 +23,9 @@ public class Main extends Application {
         stage.setTitle("Ping Pong com Java");
         stage.setScene(scene);
         stage.show();
+
+        GameLoop gameLoop = new GameLoop();
+        gameLoop.start(); // AQUI O JOGO COMEÇA
     }
 
     public static void main(String[] args) {

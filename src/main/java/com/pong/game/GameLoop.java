@@ -8,8 +8,11 @@ public class GameLoop extends AnimationTimer {
     public void handle(long l) {
 
     }
+    private int counter = 0;
+
     private void update() {
-        // lógica do jogo (movimento, colisão, regras)
+        counter++;
+        System.out.println("Frame: " + counter);
     }
 
     private void render() {
