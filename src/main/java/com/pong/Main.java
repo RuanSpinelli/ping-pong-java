@@ -24,7 +24,7 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
 
-        GameLoop gameLoop = new GameLoop();
+        GameLoop gameLoop = new GameLoop(root);
         gameLoop.start(); // AQUI O JOGO COMEÇA
     }
 
