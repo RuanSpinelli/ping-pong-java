@@ -5,20 +5,12 @@ import javafx.animation.AnimationTimer;
 public class GameLoop extends AnimationTimer {
 
     @Override
-    public void handle(long l) {
-
+    public void handle(long now) {
+        update();
     }
-    private int counter = 0;
 
     private void update() {
-        counter++;
-        System.out.println("Frame: " + counter);
+        // por enquanto vazio
+        // depois: entidades, colisões, etc
     }
-
-    private void render() {
-        // desenhar coisas na tela (por enquanto vazio)
-    }
-
-
-
 }
