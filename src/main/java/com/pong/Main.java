@@ -2,6 +2,7 @@ package com.pong;
 
 import com.pong.config.GameConfig;
 import com.pong.game.GameLoop;
+import com.pong.input.InputManager;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -20,11 +21,15 @@ public class Main extends Application {
                 GameConfig.HEIGHT
         );
 
+        // Gerenciador de inputs
+        InputManager input = new InputManager(scene);
+
         stage.setTitle("Ping Pong com Java");
         stage.setScene(scene);
         stage.show();
 
-        GameLoop gameLoop = new GameLoop(root);
+
+        GameLoop gameLoop = new GameLoop(root, input);
         gameLoop.start(); // AQUI O JOGO COMEÇA
     }
 
