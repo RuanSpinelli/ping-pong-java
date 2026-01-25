@@ -63,7 +63,7 @@ public class GameLoop extends AnimationTimer {
 
     public void updatePositions(double width, double height) {
         // Atualiza barras proporcionalmente
-        leftPaddle.setX(width * 0.05);
+        leftPaddle.setX(width * 0.03);
         rightPaddle.setX(width * 0.95);
 
         // Mantém Y atual das barras
