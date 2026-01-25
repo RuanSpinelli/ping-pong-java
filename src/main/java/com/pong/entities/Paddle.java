@@ -28,6 +28,15 @@ public class Paddle extends GameEntity {
         view.setTranslateY(view.getTranslateY() + speed);
     }
 
+    public double getHeight() {
+        return view.getHeight();
+    }
+
+    public double getWidth() {
+        return view.getWidth();
+    }
+
+
     public void setX(double x) {
         view.setTranslateX(x);
     }
