@@ -54,7 +54,6 @@ public class GameLoop extends AnimationTimer {
         if (input.isPressed(KeyCode.W)) {
             leftPaddle.moveUp();
         }
-
         // Detecta input baixo
         if (input.isPressed(KeyCode.S)) {
             leftPaddle.moveDown();
@@ -77,6 +76,8 @@ public class GameLoop extends AnimationTimer {
             ball.bounceHorizontal();
         }
 
+        checkBallPaddleCollision();
+
         // Atualiza o que vai ser apresentado na tela
         for (GameEntity entity : entities) {
             entity.update();
@@ -96,6 +97,19 @@ public class GameLoop extends AnimationTimer {
         // Bola (opcional, por enquanto não reposiciona)
         // ball.setX(width / 2);
         // ball.setY(height / 2);
+    }
+
+    private void checkBallPaddleCollision() {
+
+        if (ball.getView().getBoundsInParent()
+                .intersects(leftPaddle.getView().getBoundsInParent())) {
+            ball.bounceHorizontal();
+        }
+
+        if (ball.getView().getBoundsInParent()
+                .intersects(rightPaddle.getView().getBoundsInParent())) {
+            ball.bounceHorizontal();
+        }
     }
 
 

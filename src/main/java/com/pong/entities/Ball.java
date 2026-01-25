@@ -3,10 +3,14 @@ package com.pong.entities;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import java.util.Random;
+
 public class Ball extends GameEntity {
 
-    private double dx = 3;
-    private double dy = 3;
+    Random aleatorio = new Random();
+
+    private double dx = aleatorio.nextBoolean() ? 3 : -3;
+    private double dy = aleatorio.nextBoolean() ? 3 : -3;
 
     public Ball(double x, double y) {
         view = new Rectangle(15, 15);
