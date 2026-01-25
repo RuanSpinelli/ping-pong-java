@@ -20,11 +20,14 @@ public class GameLoop extends AnimationTimer {
     private final InputManager input;
     private final Paddle leftPaddle;
     private final Paddle rightPaddle;
+    private final Pane root;
+
 
     public GameLoop(Pane root, InputManager input) {
 
         // define detector de input
         this.input = input;
+        this.root = root;
 
         // cria a barra da esquerda
         leftPaddle = new Paddle(30, 200);
@@ -55,10 +58,18 @@ public class GameLoop extends AnimationTimer {
         if (input.isPressed(KeyCode.S)) {
             leftPaddle.moveDown();
         }
+
+        // Obtem a altura atual da janela aonde se passa o jogo
+        double screenHeight = root.getHeight();
+
+        keepPaddleInsideScreen(rightPaddle,screenHeight);
+        keepPaddleInsideScreen(leftPaddle,screenHeight);
+
         // Atualiza o que vai ser apresentado na tela
         for (GameEntity entity : entities) {
             entity.update();
         }
+
     }
 
     public void updatePositions(double width, double height) {
@@ -75,4 +86,15 @@ public class GameLoop extends AnimationTimer {
         // ball.setY(height / 2);
     }
 
+
+    private void keepPaddleInsideScreen(Paddle paddle, double screenHeight) {
+        if (paddle.getY() < 0) {
+            paddle.setY(0);
+        }
+
+        if (paddle.getY() + paddle.getHeight() > screenHeight) {
+            paddle.setY(screenHeight- paddle.getHeight());
+        }
+
+    }
 }
