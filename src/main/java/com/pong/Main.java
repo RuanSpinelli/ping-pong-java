@@ -4,8 +4,8 @@ import com.pong.config.GameConfig;
 import com.pong.game.GameLoop;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
 
 public class Main extends Application {
 
