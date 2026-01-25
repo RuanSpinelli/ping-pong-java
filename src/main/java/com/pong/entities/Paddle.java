@@ -27,4 +27,21 @@ public class Paddle extends GameEntity {
     public void moveDown() {
         view.setTranslateY(view.getTranslateY() + speed);
     }
+
+    public void setX(double x) {
+        view.setTranslateX(x);
+    }
+
+    public void setY(double y) {
+        view.setTranslateY(y);
+    }
+
+    public double getX() {
+        return view.getTranslateX();
+    }
+
+    public double getY() {
+        return view.getTranslateY();
+    }
+
 }

@@ -15,11 +15,7 @@ public class Main extends Application {
         Pane root = new Pane();
         root.setStyle("-fx-background-color: black;");
 
-        Scene scene = new Scene(
-                root,
-                GameConfig.WIDTH,
-                GameConfig.HEIGHT
-        );
+        Scene scene = new Scene(root, GameConfig.WIDTH, GameConfig.HEIGHT);
 
         // Gerenciador de inputs
         InputManager input = new InputManager(scene);
@@ -31,6 +27,17 @@ public class Main extends Application {
 
         GameLoop gameLoop = new GameLoop(root, input);
         gameLoop.start(); // AQUI O JOGO COMEÇA
+
+        stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+            GameConfig.setResolution(stage.getWidth(), stage.getHeight());
+            gameLoop.updatePositions(GameConfig.WIDTH, GameConfig.HEIGHT);
+        });
+
+        stage.heightProperty().addListener((obs, oldVal, newVal) -> {
+            GameConfig.setResolution(stage.getWidth(), stage.getHeight());
+            gameLoop.updatePositions(GameConfig.WIDTH, GameConfig.HEIGHT);
+        });
+
     }
 
     public static void main(String[] args) {

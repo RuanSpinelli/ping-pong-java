@@ -60,4 +60,19 @@ public class GameLoop extends AnimationTimer {
             entity.update();
         }
     }
+
+    public void updatePositions(double width, double height) {
+        // Atualiza barras proporcionalmente
+        leftPaddle.setX(width * 0.05);
+        rightPaddle.setX(width * 0.95);
+
+        // Mantém Y atual das barras
+        leftPaddle.setY(leftPaddle.getY());
+        rightPaddle.setY(rightPaddle.getY());
+
+        // Bola (opcional, por enquanto não reposiciona)
+        // ball.setX(width / 2);
+        // ball.setY(height / 2);
+    }
+
 }
