@@ -20,4 +20,29 @@ public class Ball extends GameEntity {
         view.setTranslateX(view.getTranslateX() + dx);
         view.setTranslateY(view.getTranslateY() + dy);
     }
+
+// Métodos para cuidar da física
+    public void bounceVertical() {
+        dy = -dy;
+    }
+    public void bounceHorizontal() {
+        dx = -dx;
+    }
+// Getters úteis
+
+    public double getWidth() {
+        return ((Rectangle) view).getWidth();
+    }
+
+    public double getHeight() {
+        return ((Rectangle) view).getHeight();
+    }
+
+    public double getX() {
+        return view.getTranslateX();
+    }
+
+    public double getY() {
+        return view.getTranslateY();
+    }
 }
