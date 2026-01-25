@@ -21,6 +21,7 @@ public class GameLoop extends AnimationTimer {
     private final Paddle leftPaddle;
     private final Paddle rightPaddle;
     private final Pane root;
+    private final Ball ball;
 
 
     public GameLoop(Pane root, InputManager input) {
@@ -34,7 +35,7 @@ public class GameLoop extends AnimationTimer {
         // Cria barra da direita
         rightPaddle = new Paddle(750, 200);
         // Cria bola
-        Ball ball = new Ball(400, 300);
+        ball = new Ball(400, 300);
 
         // adiciona as entidades na lista de entidades
         entities.add(leftPaddle);
@@ -61,9 +62,20 @@ public class GameLoop extends AnimationTimer {
 
         // Obtem a altura atual da janela aonde se passa o jogo
         double screenHeight = root.getHeight();
+        double screenWidth = root.getWidth();
 
         keepPaddleInsideScreen(rightPaddle,screenHeight);
         keepPaddleInsideScreen(leftPaddle,screenHeight);
+
+        // Bateu em cima ou embaixo
+        if (ball.getY() <= 0 || ball.getY() + ball.getHeight() >= screenHeight) {
+            ball.bounceVertical();
+        }
+
+        // Bateu na esquerda ou direita
+        if (ball.getX() <= 0 || ball.getX() + ball.getWidth() >= screenWidth) {
+            ball.bounceHorizontal();
+        }
 
         // Atualiza o que vai ser apresentado na tela
         for (GameEntity entity : entities) {
