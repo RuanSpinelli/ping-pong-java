@@ -32,6 +32,12 @@ public class Ball extends GameEntity {
     public void bounceHorizontal() {
         dx = -dx;
     }
+
+    public void increaseSpeed(double amount) {
+        dx += Math.signum(dx) * amount;
+        dy += Math.signum(dy) * amount;
+    }
+
 // Getters úteis
 
     public double getWidth() {

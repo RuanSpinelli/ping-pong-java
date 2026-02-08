@@ -5,7 +5,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Paddle extends GameEntity {
 
-    private double speed = 10;
+    private double speed = 15;
 
     public Paddle(double x, double y) {
         view = new Rectangle(20, 100);

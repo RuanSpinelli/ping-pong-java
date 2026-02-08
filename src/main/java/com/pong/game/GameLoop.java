@@ -22,6 +22,8 @@ public class GameLoop extends AnimationTimer {
     private final Paddle rightPaddle;
     private final Pane root;
     private final Ball ball;
+    private long lastSpeedIncrease = 0;
+    private static final long SPEED_INTERVAL = 15_000_000_000L; // 15s
 
 
     public GameLoop(Pane root, InputManager input) {
@@ -50,6 +52,15 @@ public class GameLoop extends AnimationTimer {
 
     @Override
     public void handle(long now) {
+
+        if (lastSpeedIncrease == 0) {
+            lastSpeedIncrease = now;
+        }
+
+        if (now - lastSpeedIncrease >= SPEED_INTERVAL) {
+            ball.increaseSpeed(1);
+            lastSpeedIncrease = now;
+        }
         // Detecta input cima
         if (input.isPressed(KeyCode.W)) {
             leftPaddle.moveUp();
