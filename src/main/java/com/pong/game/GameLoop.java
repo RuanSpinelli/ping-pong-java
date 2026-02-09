@@ -53,14 +53,26 @@ public class GameLoop extends AnimationTimer {
     @Override
     public void handle(long now) {
 
+        // Obtem o centro da bola
+        double ballCenterY = ball.getY() + ball.getHeight() / 2;
+        double paddleCenterY = rightPaddle.getY() + rightPaddle.getHeight() / 2;
+
+        if (ballCenterY > paddleCenterY) {
+            rightPaddle.moveDown();
+        } else {
+            rightPaddle.moveUp();
+        }
+
+
+        // Manipula a velocidade da bola
         if (lastSpeedIncrease == 0) {
             lastSpeedIncrease = now;
         }
-
         if (now - lastSpeedIncrease >= SPEED_INTERVAL) {
             ball.increaseSpeed(1);
             lastSpeedIncrease = now;
         }
+
         // Detecta input cima
         if (input.isPressed(KeyCode.W)) {
             leftPaddle.moveUp();

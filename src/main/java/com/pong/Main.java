@@ -28,11 +28,11 @@ public class Main extends Application {
         GameLoop gameLoop = new GameLoop(root, input);
         gameLoop.start(); // AQUI O JOGO COMEÇA
 
+        // O jogo de adapta a resolução da janela
         stage.widthProperty().addListener((obs, oldVal, newVal) -> {
             GameConfig.setResolution(stage.getWidth(), stage.getHeight());
             gameLoop.updatePositions(GameConfig.WIDTH, GameConfig.HEIGHT);
         });
-
         stage.heightProperty().addListener((obs, oldVal, newVal) -> {
             GameConfig.setResolution(stage.getWidth(), stage.getHeight());
             gameLoop.updatePositions(GameConfig.WIDTH, GameConfig.HEIGHT);
