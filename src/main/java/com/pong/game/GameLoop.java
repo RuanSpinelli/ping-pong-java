@@ -24,6 +24,18 @@ public class GameLoop extends AnimationTimer {
     private final Ball ball;
     private long lastSpeedIncrease = 0;
     private static final long SPEED_INTERVAL = 15_000_000_000L; // 15s
+    // Tempo
+    private long gameStartTime = 0;
+    // IA
+    private double aiError = 40;        // começa bem burra
+    private double aiMinError = 5;      // limite mínimo
+    private double aiSpeedMultiplier = 0.7;
+    private double aiMaxSpeedMultiplier = 2.0;
+    private long lastAiDecision = 0;
+    private double aiTolerance = 10;
+
+    private long aiReactionDelay = 350_000_000; // 0.35s
+    private long aiMinReactionDelay = 120_000_000; // 0.12s
 
 
     public GameLoop(Pane root, InputManager input) {
@@ -57,11 +69,39 @@ public class GameLoop extends AnimationTimer {
         double ballCenterY = ball.getY() + ball.getHeight() / 2;
         double paddleCenterY = rightPaddle.getY() + rightPaddle.getHeight() / 2;
 
-        if (ballCenterY > paddleCenterY) {
-            rightPaddle.moveDown();
-        } else {
-            rightPaddle.moveUp();
+        if (gameStartTime == 0) {
+            gameStartTime = now;
         }
+        double elapsedSeconds = (now - gameStartTime) / 1_000_000_000.0;
+
+        // A cada segundo a IA melhora um pouquinho
+        aiError = Math.max(aiMinError, 40 - elapsedSeconds * 1.2);
+        aiSpeedMultiplier = Math.min(aiMaxSpeedMultiplier, 0.45 + elapsedSeconds * 0.025);
+        aiReactionDelay = (long) Math.max(
+                aiMinReactionDelay,
+                350_000_000 - elapsedSeconds * 18_000_000
+        );
+
+
+        // A IA só reage no momento em que a bola se move para a direita
+        if (ball.getDx() > 0) {
+
+            if (now - lastAiDecision > aiReactionDelay) {
+
+                double targetY = ballCenterY + (Math.random() * aiError - aiError / 2);
+
+                if (targetY > paddleCenterY + aiTolerance) {
+                    rightPaddle.moveDown(aiSpeedMultiplier);
+                }
+                else if (targetY < paddleCenterY - aiTolerance) {
+                    rightPaddle.moveUp(aiSpeedMultiplier);
+                }
+
+                lastAiDecision = now;
+            }
+        }
+
+
 
 
         // Manipula a velocidade da bola
